@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SC_phone_input_player_controller : MonoBehaviour
 {
-    public float speed;
+    public float speed = 15f;
     private new Rigidbody rigidbody;
 
     float xPos = Input.acceleration.y;
@@ -19,8 +19,16 @@ public class SC_phone_input_player_controller : MonoBehaviour
         
 
     }
-    private void Update()
+  
+
+    void FixedUpdate()
     {
+
+        //rotates the character based on the direction the phone is tilted towards
+        // creates the target rotation based on the phone's x and y position
+        Quaternion targetRotation = Quaternion.LookRotation(new Vector3(xPos, 0, yPos));
+        // creates a slerp between the target rotation and current rotation. Might speed it up later, have a variable ready to do so.
+        Quaternion moveRotation = Quaternion.Slerp(rigidbody.rotation, targetRotation, Time.fixedDeltaTime);
 
         //creates a magnitude based speed variable so that the character moves faster at higher phone angles
         //creates a vector between the xpos input and ypos input
@@ -29,20 +37,11 @@ public class SC_phone_input_player_controller : MonoBehaviour
         float speedMultiplier = Mathf.Abs(Magnitude.magnitude);
 
 
-        speed = 15f * speedMultiplier;
-    }
-
-    void FixedUpdate()
-    {
-        //rotates the character based on the direction the phone is tilted towards
-        // creates the target rotation based on the phone's x and y position
-        Quaternion targetRotation = Quaternion.LookRotation(new Vector3(xPos, 0, yPos));
-        // creates a slerp between the target rotation and current rotation. Might speed it up later, have a variable ready to do so.
-        Quaternion moveRotation = Quaternion.Slerp(rigidbody.rotation, targetRotation, Time.fixedDeltaTime);
+        float movementSpeed = speed * speedMultiplier;
 
         rigidbody.MoveRotation(moveRotation);
 
-        rigidbody.AddForce(transform.forward * speed);
+        rigidbody.AddForce(transform.forward * movementSpeed);
 
     }
 }
