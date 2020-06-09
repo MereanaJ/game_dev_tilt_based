@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4000013133735880}
   - component: {fileID: 218000013595263112}
-  - component: {fileID: 154000013600109340}
+  - component: {fileID: 5597861722483866507}
   m_Layer: 0
   m_Name: Terrain
   m_TagString: Untagged
@@ -64,7 +64,7 @@ Terrain:
   m_LightmapParameters: {fileID: 15203, guid: 0000000000000000f000000000000000, type: 0}
   m_GroupingID: 0
   m_AllowAutoConnect: 0
---- !u!154 &154000013600109340
+--- !u!154 &5597861722483866507
 TerrainCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
